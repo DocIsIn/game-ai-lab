@@ -22,24 +22,9 @@ def roll_for(skill, dc, player):
     else:
         return f'{player} rolled {roll} for {skill} and failed!'
 
-import json
-
 def process_response(self, response):
-
-    try:
-        response_text = response.message.content if hasattr(response, "message") else str(response)
-        response_data = json.loads(response_text)
-        
-        if "function_call" in response_data and response_data["function_call"]["name"] == "roll_for":
-            args = response_data["function_call"]["arguments"]
-            skill = args.get("skill", "unknown skill")
-            dc = args.get("dc", 10)
-            player = args.get("player", "Player")
-            
-            return roll_for(skill, dc, player)
-    except (json.JSONDecodeError, AttributeError, TypeError):
-        pass  
-    
+    # Fill out this function to process the response from the LLM
+    # and make the function call 
     return response
 
 run_console_chat(template_file='lab05/lab05_dice_template.json',
